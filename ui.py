@@ -1,6 +1,6 @@
 import streamlit as st
 import plotly.express as px
-from data import get_level, LEVEL_XP, find_or_create_day_entry, toggle_habit_for_today, save_data, get_today_date
+from data_cloud import get_level, LEVEL_XP, find_or_create_day_entry, toggle_habit_for_today, save_data, get_today_date
 from analytics import get_stats_dataframe, compute_streak, top_habit_counts, longest_streak, day_of_week_rates, completion_histogram
 
 
@@ -567,7 +567,7 @@ def render_settings(data: dict):
         current_name = data.get("profile", {}).get("name", "المستخدم")
         new_name = st.text_input("الاسم الجديد", value=current_name)
         if st.button("حفظ اسم المستخدم", key="save_profile_name"):
-            from data import update_profile_name, save_data
+            from data_cloud import update_profile_name, save_data
             update_profile_name(data, new_name)
             save_data(data)
             st.success("تم تحديث الاسم بنجاح! 🎉")
@@ -588,7 +588,7 @@ def render_settings(data: dict):
             if not h_name.strip():
                 st.error("الرجاء إدخال اسم العادة!")
             else:
-                from data import add_habit, save_data
+                from data_cloud import add_habit, save_data
                 add_habit(data, h_name, int(h_xp), h_emoji)
                 save_data(data)
                 st.success(f"تمت إضافة العادة '{h_name}' بنجاح! 🎉")
@@ -617,7 +617,7 @@ def render_settings(data: dict):
                 with col_del:
                     # Render a red delete button
                     if st.button("حذف", key=f"del_{hid}", type="secondary"):
-                        from data import delete_habit, save_data
+                        from data_cloud import delete_habit, save_data
                         delete_habit(data, hid)
                         save_data(data)
                         st.success(f"تم حذف العادة! 🗑️")

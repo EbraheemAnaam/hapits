@@ -1,5 +1,5 @@
 import streamlit as st
-from data import load_data, save_data, get_today_date, find_or_create_day_entry
+from data_cloud import load_data, save_data, get_today_date, find_or_create_day_entry
 from ui import inject_css, render_header, render_habits, render_analytics, render_settings
 
 

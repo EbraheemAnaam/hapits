@@ -18,8 +18,8 @@ import requests
 # ─────────────────────────────────────────────
 #  ⚠️ استبدل هذين المتغيرين بقيمك الحقيقية
 # ─────────────────────────────────────────────
-MASTER_KEY = "YOUR_MASTER_KEY_HERE"   # مثال: $2a$10$abcdef...
-BIN_ID     = "YOUR_BIN_ID_HERE"       # مثال: 684f2c3ae41b4d34e87b1234
+MASTER_KEY = "$2a$10$Ec4eijWTHqZzJSAzRw/jOud1JmK/Bky2HwYeqLtg4vzbZ4Jydlfl6"   # مثال: $2a$10$abcdef...
+BIN_ID     = "6a2fe4e4f5f4af5e29f4bf6f"       # مثال: 684f2c3ae41b4d34e87b1234
 
 # ─────────────────────────────────────────────
 #  إعدادات API الثابتة — لا تعدّلها
