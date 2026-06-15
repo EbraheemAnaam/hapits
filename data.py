@@ -84,3 +84,30 @@ def toggle_habit_for_today(data: dict, habit_id: int, checked: bool):
     new_level = get_level(new_total)[0]
     leveled_up = new_level > prev_level
     return leveled_up, prev_level, new_level
+
+
+def update_profile_name(data: dict, new_name: str) -> None:
+    data.setdefault("profile", {})["name"] = new_name
+
+
+def add_habit(data: dict, name: str, xp: int, emoji: str) -> None:
+    habits = data.setdefault("habits", [])
+    new_id = max([h.get("id", 0) for h in habits]) + 1 if habits else 1
+    habits.append({
+        "id": new_id,
+        "name": name,
+        "xp": xp,
+        "emoji": emoji
+    })
+
+
+def delete_habit(data: dict, habit_id: int) -> None:
+    data["habits"] = [h for h in data.get("habits", []) if h.get("id") != habit_id]
+    # Clean up from completed list of logs to keep data clean
+    for entry in data.get("daily_log", []):
+        if habit_id in entry.get("completed", []):
+            try:
+                entry["completed"].remove(habit_id)
+            except ValueError:
+                pass
+
