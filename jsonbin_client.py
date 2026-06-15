@@ -13,17 +13,23 @@ jsonbin_client.py
 
 import time
 import json
+import os
 import requests
+from dotenv import load_dotenv
 
-# ─────────────────────────────────────────────
-#  ⚠️ استبدل هذين المتغيرين بقيمك الحقيقية
-# ─────────────────────────────────────────────
-MASTER_KEY = "$2a$10$Ec4eijWTHqZzJSAzRw/jOud1JmK/Bky2HwYeqLtg4vzbZ4Jydlfl6"   # مثال: $2a$10$abcdef...
-BIN_ID     = "6a2fe4e4f5f4af5e29f4bf6f"       # مثال: 684f2c3ae41b4d34e87b1234
+# Load configuration from .env
+load_dotenv()
 
-# ─────────────────────────────────────────────
-#  إعدادات API الثابتة — لا تعدّلها
-# ─────────────────────────────────────────────
+# Expect these environment variables in a local .env file
+MASTER_KEY = os.getenv("JSONBIN_MASTER_KEY", "")
+BIN_ID = os.getenv("JSONBIN_BIN_ID", "")
+
+if not MASTER_KEY or not BIN_ID:
+    raise RuntimeError(
+        "Missing JSONBin credentials. Create a .env file containing JSONBIN_MASTER_KEY and JSONBIN_BIN_ID (see .env.example)."
+    )
+
+# إعدادات API الثابتة — لا تعدّلها
 BASE_URL = "https://api.jsonbin.io/v3"
 HEADERS = {
     "X-Master-Key": MASTER_KEY,
